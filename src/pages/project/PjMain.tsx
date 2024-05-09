@@ -1,81 +1,275 @@
-// import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import hello from '../../assets/pj-hello.png';
 import think from '../../assets/pj-think.png';
+import Post from '../../components/Post';
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { FaChevronDown } from 'react-icons/fa6';
 
 const PjMain = () => {
+  const posts = [
+    {
+      id: 1,
+      title: '1번째 글',
+      author: '작성자',
+      views: 100,
+      createdAt: '2024-05-07',
+      isRecruiting: true,
+      field: 'IOS',
+      studyOrProject: true,
+    },
+    {
+      id: 2,
+      title: '2번째 글',
+      author: '작성자',
+      views: 10510,
+      createdAt: '2024-05-07',
+      isRecruiting: true,
+      field: 'IOS',
+      studyOrProject: false,
+    },
+    {
+      id: 3,
+      title: '3번째 글',
+      author: '작성자',
+      views: 4225,
+      createdAt: '2024-05-07',
+      isRecruiting: false,
+      field: 'IOS',
+      studyOrProject: true,
+    },
+    {
+      id: 4,
+      title: '4번째 글',
+      author: '작성자',
+      views: 523,
+      createdAt: '2024-05-07',
+      isRecruiting: true,
+      field: 'IOS',
+      studyOrProject: true,
+    },
+  ];
+
+  const sortedPosts = [...posts].sort((a, b) => b.views - a.views);
+  const topPosts = sortedPosts.slice(0, 8);
+
+  const [startIndex, setStartIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('전체');
+
+  const nextPosts = () => {
+    const nextIndex = Math.min(startIndex + 4, topPosts.length - 4);
+    setStartIndex(nextIndex);
+  };
+
+  const prevPosts = () => {
+    const nextIndex = Math.max(startIndex - 4, 0);
+    setStartIndex(nextIndex);
+  };
+
+  const visiblePosts = topPosts.slice(startIndex, startIndex + 4);
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredPosts = posts.filter(post => {
+    if (selectedCategory === '전체') {
+      return true;
+    } else if (selectedCategory === '프로젝트') {
+      return post.studyOrProject;
+    } else if (selectedCategory === '스터디') {
+      return !post.studyOrProject;
+    }
+  });
+
   return (
     <>
       <Header />
       <Section>
         <div className='inner'>
           <div className='title'>
-            <img src={hello} className='pj-icon' />
+            <img src={hello} className='pj-icon' alt='hello icon' />
             <h2>이번 주 인기 모집글</h2>
+            <Controls>
+              <span>자세히 보기 </span>
+              <StyledFiChevronLeft onClick={prevPosts} />
+              <StyledFiChevronRight onClick={nextPosts} />
+            </Controls>
           </div>
-          <div id='hot-board'>
-            <Board>
-              <h2>제목</h2>
-            </Board>
+          <div className='post-slider'>
+            {visiblePosts.map(post => (
+              <Post
+                key={post.id}
+                title={post.title}
+                author={post.author}
+                views={post.views}
+                createdAt={post.createdAt}
+                isRecruiting={post.isRecruiting}
+                field={post.field}
+                studyOrProject={post.studyOrProject}
+              />
+            ))}
           </div>
-          <div className='title'>
-            <img src={think} className='pj-icon' />
-            <span className='select-board'>전체</span>
-            <span className='select-board'>프로젝트</span>
-            <span className='select-board'>스터디</span>
+        </div>
+      </Section>
+      <Section>
+        <div className='inner'>
+          <div className='tabs'>
+            <img src={think} className='pj-icon' alt='hello icon' />
+            <span
+              className={selectedCategory === '전체' ? 'tab active' : 'tab'}
+              onClick={() => handleCategoryClick('전체')}
+            >
+              전체
+            </span>
+            <span
+              className={selectedCategory === '프로젝트' ? 'tab active' : 'tab'}
+              onClick={() => handleCategoryClick('프로젝트')}
+            >
+              프로젝트
+            </span>
+            <span
+              className={selectedCategory === '스터디' ? 'tab active' : 'tab'}
+              onClick={() => handleCategoryClick('스터디')}
+            >
+              스터디
+            </span>
           </div>
+          <div className='post-grid'>
+            {filteredPosts.map(post => (
+              <Post
+                key={post.id}
+                title={post.title}
+                author={post.author}
+                views={post.views}
+                createdAt={post.createdAt}
+                isRecruiting={post.isRecruiting}
+                field={post.field}
+                studyOrProject={post.studyOrProject}
+              />
+            ))}
+          </div>
+          <LoadMoreButton>
+            더 많은 구인글 보기
+            <FaChevronDown />
+          </LoadMoreButton>
         </div>
       </Section>
     </>
   );
 };
 
-const Board = styled.div`
-  background-color: #fff;
-  flex-shrink: 0;
-  width: 275px;
-  height: 275px;
-  padding: 25px;
-  border-radius: 15px;
-  border: 1px solid #868d94;
-  transition: all 0.3s ease-out;
-  &:hover {
-    transform: translate(-5px, -5px);
-    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+const Section = styled.section`
+  .inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .pj-icon {
+    margin-right: 20px;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  .post-slider {
+    & > * {
+      flex-shrink: 0;
+    }
+    padding-top: 10px;
+    display: flex;
+    overflow-x: auto;
+    gap: 25px;
+    padding-bottom: 20px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .tabs {
+    display: flex;
+    margin-bottom: 40px;
+  }
+
+  .tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
+    color: #bcbcbc;
+    margin-right: 30px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+  }
+
+  .tab.active {
+    color: #000;
+  }
+
+  .tab:hover {
+    color: #555;
+  }
+
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-bottom: 20px;
   }
 `;
 
-const Section = styled.section`
-  .inner {
-    max-width: 1280px;
-  }
-  .title {
-    margin-top: 24px;
-    > * {
-      font-size: 20px;
-    }
-    display: flex;
-    align-items: center;
-    height: 75px;
-    .pj-icon {
-      padding: 10px;
-    }
-  }
-  #hot-board {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  .select-board {
-    font-size: 20px;
-    font-weight: Bold;
-    padding: 10px;
-    margin-right: 20px;
-    cursor: pointer;
-    color: #bcbcbc;
+const LoadMoreButton = styled.button`
+  margin: 0 auto;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  font-size: 16px;
+  gap: 6px;
+  font-weight: 500;
+  background-color: #fff;
+  border: 1.5px solid #bcbcbc;
+  height: 50px;
+  padding: 0px;
+  border-radius: 100px;
+  box-shadow: 0 4px 8px 0 rgba(50, 50, 50, 0.1);
+`;
+
+const Controls = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: #8e94a0;
+`;
+
+const StyledFiChevronRight = styled(FiChevronRight)`
+  font-size: 24px;
+  cursor: pointer;
+  &:hover {
+    color: #333;
   }
 `;
+
+const StyledFiChevronLeft = styled(FiChevronLeft)`
+margin-left: 5px;
+  font-size: 24px;
+  border-radius: 50%:
+  border: 1px solid #333;
+  cursor: pointer;
+  &:hover {
+    color: #333;
+  }
+`;
+
 export default PjMain;

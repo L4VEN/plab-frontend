@@ -73,13 +73,15 @@ const GlobalStyle = createGlobalStyle`
             filter: brightness(0.95);
         }
     }
+
     .inner {
         width: 100%;
-        max-width: 1280px;
+        max-width: 1132px;
         height: 100%;
         margin: 0 auto;
         padding: 0 2rem;
     }
+    
     #root {
         margin: 0 auto;
     }

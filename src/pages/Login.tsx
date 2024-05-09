@@ -43,7 +43,7 @@ const Login = () => {
 const Background = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #f4f4f4; /* 배경색을 원하는 색상으로 지정하세요 */
+  background-color: #f4f4f4;
   box-sizing: border-box;
   display: flex;
   align-items: center;
