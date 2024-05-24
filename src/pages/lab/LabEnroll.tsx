@@ -1,26 +1,12 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Header from '../../components/Header';
 
 const LabEnroll = () => {
-  const navigate = useNavigate();
-  const Login = () => {
-    navigate('/login');
-  };
-
+  // const navigate = useNavigate();
   return (
     <Background>
-      <Nav>
-        <div className='head'>
-          <div className='head-left'>
-            <h1 className='logo'>플랩</h1>
-          </div>
-          <div className='head-right'>
-            <button className='loginBtn' onClick={Login}>
-              로그인
-            </button>
-          </div>
-        </div>
-      </Nav>
+      <Header />
       <Inner>
         <div className='rental-screen'>
           <div className='rental-container'>
@@ -83,60 +69,10 @@ const LabEnroll = () => {
 const Background = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #f4f4f4; /* 배경색을 원하는 색상으로 지정하세요 */
+  background-color: #f5f5f8; /* 배경색을 원하는 색상으로 지정하세요 */
   box-sizing: border-box;
   overflow-y: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
   font-family: 'Pretendard-Medium';
-`;
-
-const Nav = styled.div`
-  width: 100%;
-  height: 80px;
-  display: flex;
-  flex-shrink: 0;
-  position: fixed;
-  justify-content: center; // 수평 가운데 정렬
-  background-color: #fff;
-
-  & > .head {
-    width: 60%;
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  & > .head > .head-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-  }
-
-  & > .head > .head-left > .logo {
-    font-size: 40px;
-    font-family: '달라왕 Bold';
-    color: #6a96ec;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  & > .head > .head-right > .loginBtn {
-    width: 100px;
-    height: 48px;
-    border: 1px solid #ddd;
-    border-radius: 25px;
-    background-color: #fff;
-    font-family: 'Pretendard-Regular';
-    font-size: 14px;
-    font-weight: 400;
-    color: #000;
-    text-align: center;
-    &:hover {
-      cursor: pointer;
-    }
-  }
 `;
 
 const Inner = styled.div`
@@ -145,7 +81,7 @@ const Inner = styled.div`
   font-family: 'Pretendard-Medium';
 
   & > .rental-screen {
-    margin-top: 120px;
+    margin-top: 50px;
     margin-bottom: 50px;
     height: 100%;
   }
@@ -169,7 +105,7 @@ const Inner = styled.div`
     border: 2px solid #bebec7;
     border-radius: 10px;
     margin-top: 30px;
-    padding-left: 20px;
+    padding-left: 10px;
     background-image: url('path/to/calendar-image.png');
     background-repeat: no-repeat;
     background-position: right center; /* 이미지를 오른쪽 중앙에 위치하도록 설정 */
@@ -183,7 +119,8 @@ const Inner = styled.div`
     border: 2px solid #bebec7;
     border-radius: 10px;
     margin-top: 30px;
-    padding-left: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
     background-image: url('path/to/calendar-image.png');
     background-repeat: no-repeat;
     background-position: right center; /* 이미지를 오른쪽 중앙에 위치하도록 설정 */

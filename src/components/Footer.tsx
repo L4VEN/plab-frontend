@@ -1,15 +1,37 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <FooterStyle>
       <div id='footer-content'>
         <div id='footer-nav'>
           <a id='footer-nav-title'>플랩</a>
           <nav>
-            <a className='footer-nav-border'>문의하기</a>
-            <a className='footer-nav-border'>실습실 대여</a>
-            <a>프로젝트 구인</a>
+            <a
+              className='footer-nav-border'
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              문의하기
+            </a>
+            <a
+              className='footer-nav-border'
+              onClick={() => {
+                navigate('/lab');
+              }}
+            >
+              실습실 대여
+            </a>
+            <a
+              onClick={() => {
+                navigate('/project');
+              }}
+            >
+              프로젝트 구인
+            </a>
           </nav>
         </div>
         <div id='footer-text'>

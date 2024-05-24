@@ -3,45 +3,23 @@ import styled from 'styled-components';
 import Arrow from '../../assets/arrow.svg';
 import GBSW from '../../assets/GBSW.webp';
 import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 const LabRent = () => {
   const navigate = useNavigate();
-  const Home = () => {
-    navigate('/');
-  };
-
-  const Login = () => {
-    navigate('/login');
-  };
 
   const RabEnroll = () => {
     navigate('/lab/board');
   };
   return (
     <Background>
-      <Nav>
-        <div className='head'>
-          <div className='head-left'>
-            <h1 className='logo' onCanPlay={Home}>
-              플랩
-            </h1>
-            <p className='labRent'>실습실 대여</p>
-          </div>
-          <div className='head-right'>
-            <button className='loginBtn' onClick={Login}>
-              로그인
-            </button>
-          </div>
-        </div>
-      </Nav>
+      <Header />
       <Inner>
         <Head>
           <div className='rent-container'>
             <img src={GBSW} alt='경소고 로고' className='gbsw' />
-            <div className='rent-box'>
-              <p className='rent' onClick={RabEnroll}>
-                실습실 대여하기
-              </p>
+            <div className='rent-box' onClick={RabEnroll}>
+              <p className='rent'>실습실 대여하기</p>
               <img src={Arrow} alt='오른쪽 표시 화살표' className='arrow' />
             </div>
           </div>
@@ -71,7 +49,7 @@ const LabRent = () => {
 };
 const Background = styled.div`
   width: 100%;
-  background-color: #f4f4f4; /* 배경색을 원하는 색상으로 지정하세요 */
+  background-color: #f5f5f8;
   box-sizing: border-box;
 `;
 
@@ -81,99 +59,52 @@ const Inner = styled.div`
   font-family: 'Pretendard-Medium';
 `;
 
-const Nav = styled.div`
-  width: 100%;
-  height: 80px;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center; // 수평 가운데 정렬
-  background-color: #fff;
-
-  & > .head {
-    width: 60%;
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  & > .head > .head-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-  }
-
-  & > .head > .head-left > .logo {
-    font-size: 40px;
-    font-family: '달라왕 Bold';
-    color: #6a96ec;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  & > .head > .head-left > .labRent {
-    font-size: 20px;
-    font-family: 'Pretendard-Medium';
-  }
-
-  & > .head > .head-right > .loginBtn {
-    width: 100px;
-    height: 48px;
-    border: 1px solid #ddd;
-    border-radius: 25px;
-    background-color: #fff;
-    font-family: 'Pretendard-Regular';
-    font-size: 14px;
-    font-weight: 400;
-    color: #000;
-    text-align: center;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`;
-
 const Head = styled.div`
   width: 100%;
-  height: 500px;
+  height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 50px;
 
-  /* Head의 자식 요소들을 수평으로 배치 */
   & > .rent-container {
-    align-items: center;
-    justify-content: center;
-    width: 250px;
-    height: 250px;
-    border: solid #bebec7;
-    border-radius: 30px;
-    background-color: #fff;
-    box-shadow: 0px 4px 8px 0px #0000001a;
-  }
-
-  & > .rent-container > .gbsw {
-    width: 100px;
-    margin-left: 40px;
-    margin-top: 50px;
-  }
-
-  & > .rent-container > .rent-box {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+    border: 1px solid #bebec7;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 2px 4px 12px #00000014;
+  }
+
+  & > .rent-container {
+    align-items: center;
+    justify-content: center;
+    .gbsw {
+      margin-top: 40px;
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  & > .rent-container > .rent-box {
+    margin-top: 10px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   & > .rent-container > .rent-box > .rent {
     color: #6a96ec;
     font-size: 20px;
     font-family: 'Pretendard-Bold';
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   & > .rent-container > .rent-box > .arrow {
@@ -184,24 +115,30 @@ const Head = styled.div`
   & > .notice-container {
     width: 800px;
     height: 250px;
-    border: solid #bebec7;
+    border: 1px solid #bebec7;
     border-radius: 30px;
     background-color: #fff;
-    box-shadow: 0px 4px 8px 0px #0000001a;
+    box-shadow: 2px 4px 12px #00000014;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    padding-left: 40px;
   }
 
-  & > .notice-container > .notice-phrases > .important-notice {
-    color: #fd1717;
-    font-size: 20px;
-    font-family: 'Pretendard-Bold';
+  & > .notice-container > .notice-phrases {
+    text-align: start;
+    .important-notice {
+      color: #fd1717;
+      font-size: 20px;
+      font-weight: 700;
+    }
   }
 
   & > .notice-container > .notice-phrases > .first-promise > .unImportant-notice,
   & > .notice-container > .notice-phrases > .second-promise > .unImportant-notice {
-    font-family: 'Pretendard-Bold';
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 10px;
   }
 
   & > .notice-container > .notice-phrases > .first-promise,
@@ -212,6 +149,8 @@ const Head = styled.div`
 
   & > .notice-container > .notice-phrases > .first-promise > .explanation,
   & > .notice-container > .notice-phrases > .second-promise .explanation {
+    margin: 0;
+    margin-bottom: 20px;
     font-size: 17px;
     color: #bebec7;
   }
@@ -223,7 +162,7 @@ const Body = styled.div`
   border: 1px solid #bebec7;
   border-radius: 30px;
   background-color: #fff;
-  box-shadow: 0px 4px 8px 0px #0000001a;
+  box-shadow: 2px 4px 12px #00000014;
   display: flex;
   align-items: center;
   justify-content: center;

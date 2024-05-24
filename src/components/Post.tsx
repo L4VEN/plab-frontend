@@ -32,6 +32,7 @@ const Post: React.FC<PostProps> = ({ title, author, views, createdAt, isRecruiti
 };
 
 const PostContainer = styled.div`
+  position: relative;
   background-color: #fff;
   width: 250px;
   height: 250px;
@@ -107,12 +108,11 @@ const Author = styled.p`
 `;
 
 const Views = styled.p`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 0;
+  position: absolute;
+  padding-left: 30px;
+  right: 15px;
+  bottom: 0;
   color: #bcbcbc;
-  margin-top: 64px;
 `;
 
 export default Post;

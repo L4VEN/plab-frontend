@@ -6,50 +6,13 @@ import think from '../../assets/pj-think.png';
 import Post from '../../components/Post';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import { FaChevronDown } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
+import Footer from '../../components/Footer';
+
+import { posts } from '../../data/postData';
 
 const PjMain = () => {
-  const posts = [
-    {
-      id: 1,
-      title: '1번째 글',
-      author: '작성자',
-      views: 100,
-      createdAt: '2024-05-07',
-      isRecruiting: true,
-      field: 'IOS',
-      studyOrProject: true,
-    },
-    {
-      id: 2,
-      title: '2번째 글',
-      author: '작성자',
-      views: 10510,
-      createdAt: '2024-05-07',
-      isRecruiting: true,
-      field: 'IOS',
-      studyOrProject: false,
-    },
-    {
-      id: 3,
-      title: '3번째 글',
-      author: '작성자',
-      views: 4225,
-      createdAt: '2024-05-07',
-      isRecruiting: false,
-      field: 'IOS',
-      studyOrProject: true,
-    },
-    {
-      id: 4,
-      title: '4번째 글',
-      author: '작성자',
-      views: 523,
-      createdAt: '2024-05-07',
-      isRecruiting: true,
-      field: 'IOS',
-      studyOrProject: true,
-    },
-  ];
+  const navigate = useNavigate();
 
   const sortedPosts = [...posts].sort((a, b) => b.views - a.views);
   const topPosts = sortedPosts.slice(0, 8);
@@ -137,7 +100,7 @@ const PjMain = () => {
             </span>
           </div>
           <div className='post-grid'>
-            {filteredPosts.map(post => (
+            {filteredPosts.reverse().map(post => (
               <Post
                 key={post.id}
                 title={post.title}
@@ -150,23 +113,23 @@ const PjMain = () => {
               />
             ))}
           </div>
-          <LoadMoreButton>
+          <LoadMoreButton
+            onClick={() => {
+              navigate('/project/more');
+            }}
+          >
             더 많은 구인글 보기
             <FaChevronDown />
           </LoadMoreButton>
         </div>
       </Section>
+      <Footer />
     </>
   );
 };
 
 const Section = styled.section`
-  .inner {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
+  padding-top: 20px;
   .title {
     display: flex;
     align-items: center;
@@ -231,6 +194,7 @@ const Section = styled.section`
 const LoadMoreButton = styled.button`
   margin: 0 auto;
   margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -51,7 +51,10 @@ const GlobalStyle = createGlobalStyle`
     html, body {
         margin: 0;
         padding: 0;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
+    
 
     a, button {
         all: unset;
@@ -74,12 +77,17 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+    ::-webkit-scrollbar {
+	    display: none;
+    }   
+
+
     .inner {
         width: 100%;
-        max-width: 1132px;
+        max-width: 1120px;
         height: 100%;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 20px;
     }
     
     #root {
