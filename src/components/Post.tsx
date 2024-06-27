@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IoEyeOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 interface PostProps {
+  id: number;
   title: string;
   author: string;
   views: number;
@@ -12,22 +14,24 @@ interface PostProps {
   studyOrProject: boolean;
 }
 
-const Post: React.FC<PostProps> = ({ title, author, views, createdAt, isRecruiting, field, studyOrProject }) => {
+const Post: React.FC<PostProps> = ({ id, title, author, views, createdAt, isRecruiting, field, studyOrProject }) => {
   return (
-    <PostContainer>
-      <div className='tag-container'>
-        {isRecruiting ? <Tag className='recruit'>구인 중</Tag> : <Tag className='deadline'>마감</Tag>}
-        <Tag className='field'>{field}</Tag>
-        {studyOrProject ? <Tag className='storpj'>프로젝트</Tag> : <Tag className='storpj'>스터디</Tag>}
-      </div>
-      <Title>{title}</Title>
-      <Info>마감일 | {createdAt}</Info>
-      <Author>{author}</Author>
-      <Views>
-        <IoEyeOutline className='eye' />
-        {views}
-      </Views>
-    </PostContainer>
+    <Link to={`/project/${id}`} style={{ textDecoration: 'none' }}>
+      <PostContainer>
+        <div className='tag-container'>
+          {isRecruiting ? <Tag className='recruit'>구인 중</Tag> : <Tag className='deadline'>마감</Tag>}
+          <Tag className='field'>{field}</Tag>
+          {studyOrProject ? <Tag className='storpj'>프로젝트</Tag> : <Tag className='storpj'>스터디</Tag>}
+        </div>
+        <Title>{title}</Title>
+        <Info>마감일 | {createdAt}</Info>
+        <Author>{author}</Author>
+        <Views>
+          <IoEyeOutline className='eye' />
+          {views}
+        </Views>
+      </PostContainer>
+    </Link>
   );
 };
 

@@ -63,7 +63,7 @@ const PjMain = () => {
           <div className='post-slider'>
             {visiblePosts.map(post => (
               <Post
-                key={post.id}
+                id={post.id}
                 title={post.title}
                 author={post.author}
                 views={post.views}
@@ -102,7 +102,7 @@ const PjMain = () => {
           <div className='post-grid'>
             {filteredPosts.reverse().map(post => (
               <Post
-                key={post.id}
+                id={post.id}
                 title={post.title}
                 author={post.author}
                 views={post.views}

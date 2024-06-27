@@ -50,15 +50,18 @@ const Header = () => {
 };
 
 const HeaderStyle = styled.header`
+  z-index: 1000;
   width: 100%;
-  height: 80px;
+  height: 75px;
   position: sticky;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgb(238, 238, 238);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px -2px 16px;
   .head-container {
     width: 100%;
     height: 100%;
